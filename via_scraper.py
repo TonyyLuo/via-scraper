@@ -37,7 +37,33 @@ date2.send_keys("08/22/2019")
 search_button = driver.find_element_by_id("Gtm_Retail_Search_SearchBtn")
 search_button.click()
 
-# doc = BeautifulSoup(driver.page_source, "html.parser")
+doc = BeautifulSoup(driver.page_source, "html.parser")
+
+price_table = doc.find("div", attrs={'id':'fare-matrix'})
+
+routes = price_table.find("div",class_="train-route-container")
+
+print(routes.find("span",class_="schedule-info"))
+
+
+# extracted_records = []
+# for route in routes:
+#     title = route.find("span",class_="schedule-info")
+#     url = link['href']
+#     #There are better ways to check if a URL is absolute in Python. For sake simplicity we'll just stick to .startwith method of a string
+#     # https://stackoverflow.com/questions/8357098/how-can-i-check-if-a-url-is-absolute-using-python
+#     if not url.startswith('http'):
+#         url = "https://reddit.com"+url
+#     # You can join urls better using urlparse library of python.
+#     # https://docs.python.org/3/library/urllib.parse.html#urllib.parse.urljoin
+#     record = {
+#         'title':title,
+#         'url':url
+#         }
+#     extracted_records.append(record)
+# print(extracted_records)
+
+
 
 
 
