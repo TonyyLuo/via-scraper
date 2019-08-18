@@ -1,0 +1,74 @@
+from selenium import webdriver
+from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.support.ui import Select
+from selenium.webdriver.support.ui import WebDriverWait
+from bs4 import BeautifulSoup
+import time
+
+#Initialize a Firefox webdriver
+driver = webdriver.Firefox(executable_path=r'C:\Users\Tony Luo\Downloads\geckodriver.exe')
+
+#Grab the web page
+driver.get("https://reservia.viarail.ca/")
+
+# You'll use selenium.webdriver.support.ui.Select
+# that we imported above to grab the Seelct element called
+# t_web_lookup__license_type_name, then select Acupuncturists
+
+# We use .find_element_by_name here because we know the name
+loc1 = driver.find_element_by_id("cmbStationsFrom")
+loc1.send_keys("Ottawa")
+time.sleep(1)
+loc1.send_keys(Keys.ENTER)
+
+loc2 = driver.find_element_by_id("cmbStationsTo")
+loc2.send_keys("Toronto")
+time.sleep(1)
+loc2.send_keys(Keys.ENTER)
+
+date1 = driver.find_element_by_id("txtDateFrom")
+date1.clear()
+date1.send_keys("08/21/2019")
+
+date2 = driver.find_element_by_id("txtDateTo")
+date2.clear()
+date2.send_keys("08/22/2019")
+
+search_button = driver.find_element_by_id("Gtm_Retail_Search_SearchBtn")
+search_button.click()
+
+# doc = BeautifulSoup(driver.page_source, "html.parser")
+
+
+
+# # Instead of using requests.get, we just look at .page_source of the driver
+# driver.page_source
+#
+# # We can feed that into Beautiful Soup
+# doc = BeautifulSoup(driver.page_source, "html.parser")
+#
+# # It's a tricky table, but this grabs the linked names inside of the A
+# #rows = doc.select("#datagrid_results tr")
+# rows = doc.find('table', id='datagrid_results').find_all('tr', attrs={'class': None})
+#
+# doctors = []
+# for row in rows:
+#     # print(row.attrs)
+#     # Find the ones that don't have 'style' as an attribute
+#     if 'style' in row.attrs:
+#         # Skip it! It's a header or footer row
+#         pass
+#     else:
+#         cells = row.find_all("td")
+#         doctor = {
+#             'name': cells[0].text,
+#             'number': cells[1].text,
+#             'profession': cells[2].text,
+#             'type': cells[3].text,
+#             'status': cells[4].text,
+#             'city': cells[5].text,
+#             'state': cells[6].text
+#         }
+#         doctors.append(doctor)
+#
+# print(doctors)
