@@ -43,14 +43,32 @@ price_table = doc.find("div", attrs={'id':'fare-matrix'})
 
 routes = price_table.find("div",class_="train-route-container")
 
-schedule = routes.find_all("span",class_="schedule-info")
+num = routes.find("div",class_="left column column-train-number").text
+print(num)
 
+schedule = routes.find_all("span",class_="schedule-info")
 departure = schedule[0].text
 arrival = schedule[1].text
-
 print(departure)
 print(arrival)
 
+duration = routes.find("div",class_="schedule-info-duration left column").text
+print(duration)
+
+escape = routes.find("div",class_="column column-special-fare").find("label").text
+print(escape)
+
+economy = routes.find("div",class_="column column-economy-fare column-economy-discounted-fare").find("label").int
+print(economy)
+
+economyPlus = routes.find("div",class_="column column-economy-fare column-economy-regular-fare").find("label").int
+print(economyPlus)
+
+business = routes.find("div",class_="column column-business-fare column-business-discounted-fare").find("label").text
+print(business)
+
+businessPlus = routes.find("div",class_="column column-business-fare column-business-regular-fare").find("label").text
+print(businessPlus)
 
 # extracted_records = []
 # for route in routes:
