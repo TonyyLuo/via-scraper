@@ -41,34 +41,36 @@ doc = BeautifulSoup(driver.page_source, "html.parser")
 
 price_table = doc.find("div", attrs={'id':'fare-matrix'})
 
-routes = price_table.find("div",class_="train-route-container")
+routes = price_table.find_all("div",class_="train-route-container")
 
-num = routes.find("div",class_="left column column-train-number").text
-print(num)
+for route in routes:
 
-schedule = routes.find_all("span",class_="schedule-info")
-departure = schedule[0].text
-arrival = schedule[1].text
-print(departure)
-print(arrival)
+    num = route.find("div",class_="left column column-train-number").text
+    print(num)
 
-duration = routes.find("div",class_="schedule-info-duration left column").text
-print(duration)
+    schedule = route.find_all("span",class_="schedule-info")
+    departure = schedule[0].text
+    arrival = schedule[1].text
+    print(departure)
+    print(arrival)
 
-escape = routes.find("div",class_="column column-special-fare").find("label").text
-print(escape)
+    duration = route.find("div",class_="schedule-info-duration left column").text
+    print(duration)
 
-economy = routes.find("div",class_="column column-economy-fare column-economy-discounted-fare").find("label").int
-print(economy)
+    escape = route.find("div",class_="column column-special-fare").text
+    print(escape)
 
-economyPlus = routes.find("div",class_="column column-economy-fare column-economy-regular-fare").find("label").int
-print(economyPlus)
+    economy = route.find("div",class_="column column-economy-fare column-economy-discounted-fare").text
+    print(economy)
 
-business = routes.find("div",class_="column column-business-fare column-business-discounted-fare").find("label").text
-print(business)
+    economyPlus = route.find("div",class_="column column-economy-fare column-economy-regular-fare").text
+    print(economyPlus)
 
-businessPlus = routes.find("div",class_="column column-business-fare column-business-regular-fare").find("label").text
-print(businessPlus)
+    business = route.find("div",class_="column column-business-fare column-business-discounted-fare").text
+    print(business)
+
+    businessPlus = route.find("div",class_="column column-business-fare column-business-regular-fare").text
+    print(businessPlus)
 
 # extracted_records = []
 # for route in routes:
