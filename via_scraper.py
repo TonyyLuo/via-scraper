@@ -58,15 +58,15 @@ for route in routes:
     businessPlus = route.find("div",class_="column column-business-fare column-business-regular-fare").text
 
     schedule = {
-        'trainNum': trainNum,
-        'departure': departure,
-        'arrival': arrival,
-        'duration': duration,
-        'escape': escape,
-        'economy': economy,
-        'economyPlus': economyPlus,
-        'business': business,
-        'businessPlus': businessPlus
+        'trainNum': trainNum.strip(),
+        'departure': departure.strip(),
+        'arrival': arrival.strip(),
+        'duration': duration.strip(),
+        'escape': escape.strip(),
+        'economy': economy.strip(),
+        'economyPlus': economyPlus.strip(),
+        'business': business.strip(),
+        'businessPlus': businessPlus.strip()
     }
     schedules.append(schedule)
 
