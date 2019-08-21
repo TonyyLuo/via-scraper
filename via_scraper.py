@@ -43,34 +43,65 @@ price_table = doc.find("div", attrs={'id':'fare-matrix'})
 
 routes = price_table.find_all("div",class_="train-route-container")
 
+
+schedules = []
 for route in routes:
-
-    num = route.find("div",class_="left column column-train-number").text
-    print(num)
-
-    schedule = route.find_all("span",class_="schedule-info")
-    departure = schedule[0].text
-    arrival = schedule[1].text
-    print(departure)
-    print(arrival)
-
+    trainNum = route.find("div",class_="left column column-train-number").text
+    schedule_times = route.find_all("span",class_="schedule-info")
+    departure = schedule_times[0].text
+    arrival = schedule_times[1].text
     duration = route.find("div",class_="schedule-info-duration left column").text
-    print(duration)
-
     escape = route.find("div",class_="column column-special-fare").text
-    print(escape)
-
     economy = route.find("div",class_="column column-economy-fare column-economy-discounted-fare").text
-    print(economy)
-
     economyPlus = route.find("div",class_="column column-economy-fare column-economy-regular-fare").text
-    print(economyPlus)
-
     business = route.find("div",class_="column column-business-fare column-business-discounted-fare").text
-    print(business)
-
     businessPlus = route.find("div",class_="column column-business-fare column-business-regular-fare").text
-    print(businessPlus)
+
+    schedule = {
+        'trainNum': trainNum,
+        'departure': departure,
+        'arrival': arrival,
+        'duration': duration,
+        'escape': escape,
+        'economy': economy,
+        'economyPlus': economyPlus,
+        'business': business,
+        'businessPlus': businessPlus
+    }
+    schedules.append(schedule)
+
+print(schedules)
+
+
+# for route in routes:
+#
+#     num = route.find("div",class_="left column column-train-number").text
+#     print(num)
+#
+#     schedule = route.find_all("span",class_="schedule-info")
+#     departure = schedule[0].text
+#     arrival = schedule[1].text
+#     print(departure)
+#     print(arrival)
+#
+#     duration = route.find("div",class_="schedule-info-duration left column").text
+#     print(duration)
+#
+#     escape = route.find("div",class_="column column-special-fare").text
+#     print(escape)
+#
+#     economy = route.find("div",class_="column column-economy-fare column-economy-discounted-fare").text
+#     print(economy)
+#
+#     economyPlus = route.find("div",class_="column column-economy-fare column-economy-regular-fare").text
+#     print(economyPlus)
+#
+#     business = route.find("div",class_="column column-business-fare column-business-discounted-fare").text
+#     print(business)
+#
+#     businessPlus = route.find("div",class_="column column-business-fare column-business-regular-fare").text
+#     print(businessPlus)
+
 
 # extracted_records = []
 # for route in routes:
